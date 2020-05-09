@@ -30,4 +30,6 @@ void print_array(Array_ptr elements);
 Array_ptr copy_array(int numbers[], int length);
 void free_array(Array_ptr src);
 
+void run_test(void);
+
 #endif

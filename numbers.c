@@ -11,6 +11,7 @@ int main(void)
   print_array(squares);
   print_array(even_numbers);
   printf("%d\n", reduce(&elements, 0, &add));
+  run_test();
   free_array(squares);
   free_array(even_numbers);
   return 0;
