@@ -15,9 +15,9 @@ typedef struct
 {
   int *array;
   int length;
-} ARRAY;
+} Array;
 
-typedef ARRAY* Array_ptr;
+typedef Array* Array_ptr;
 
 Array_ptr map(Array_ptr src, Mapper mapper);
 Array_ptr filter(Array_ptr src, Predicate predicate);
