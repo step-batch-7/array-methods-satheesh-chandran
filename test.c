@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "array.h"
 
 int assert_equal(int expected, int actual, const char discription[]);

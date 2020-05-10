@@ -17,7 +17,8 @@ typedef struct
   int length;
 } Array;
 
-typedef Array* Array_ptr;
+typedef Array *Array_ptr;
+typedef int *int_ptr;
 
 Array_ptr map(Array_ptr src, Mapper mapper);
 Array_ptr filter(Array_ptr src, Predicate predicate);
@@ -31,5 +32,7 @@ Array_ptr copy_array(int numbers[], int length);
 void free_array(Array_ptr src);
 
 void run_test(void);
+
+void proxy_main(void);
 
 #endif
