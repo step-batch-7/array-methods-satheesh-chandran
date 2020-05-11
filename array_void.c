@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "array_void.h"
 
-ArrayVoid_ptr create_ArrayVoid(int length)
+ArrayVoid_ptr create_array_void(int length)
 {
   ArrayVoid_ptr array_void = malloc(sizeof(ArrayVoid));
   array_void->length = 0;
@@ -20,7 +20,7 @@ void insert_number_to_void_array(ArrayVoid_ptr src, Object numbers, int length)
 
 ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid mapper)
 {
-  ArrayVoid_ptr map_result = create_ArrayVoid(src->length);
+  ArrayVoid_ptr map_result = create_array_void(src->length);
   for (int index = 0; index < src->length; index++)
   {
     map_result->array[index] = mapper(src->array[index]);
@@ -42,7 +42,7 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
       count++;
     }
   }
-  ArrayVoid_ptr filter_result = create_ArrayVoid(count);
+  ArrayVoid_ptr filter_result = create_array_void(count);
   for (int index = 0; index < count; index++)
   {
     filter_result->array[index] = temp[index];

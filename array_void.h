@@ -21,7 +21,7 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate);
 Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer);
 
 void free_void_array(ArrayVoid_ptr src);
-ArrayVoid_ptr create_ArrayVoid(int length);
+ArrayVoid_ptr create_array_void(int length);
 void insert_number_to_void_array(ArrayVoid_ptr src, Object numbers, int length);
 
 #endif

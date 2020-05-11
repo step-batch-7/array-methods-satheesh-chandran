@@ -80,16 +80,16 @@ int main(void)
 
   long int nums[] = {2, 6, 3, 6, 1, 9, 4, 12, 11, 3};
   size = sizeof(nums) / sizeof(long int);
-  ArrayVoid_ptr array_void = create_ArrayVoid(size);
-  insert_number_to_void_array(array_void, nums, size);
-  display_number_array(array_void);
-  ArrayVoid_ptr cubes = map_void(array_void, &cube);
+  ArrayVoid_ptr input_array_void = create_array_void(size);
+  insert_number_to_void_array(input_array_void, nums, size);
+  ArrayVoid_ptr cubes = map_void(input_array_void, &cube);
+  ArrayVoid_ptr odd_numbers = filter_void(input_array_void, &is_odd);
+  display_number_array(input_array_void);
   display_number_array(cubes);
-  free_void_array(cubes);
-  ArrayVoid_ptr odd_numbers = filter_void(array_void, &is_odd);
   display_number_array(odd_numbers);
+  printf("%d\n", (int)reduce_void(input_array_void, 0, &addition));
+  free_void_array(cubes);
   free_void_array(odd_numbers);
-  printf("%d\n", (int)reduce_void(array_void, 0, &addition));
-
+  free_void_array(input_array_void);
   return 0;
 }
