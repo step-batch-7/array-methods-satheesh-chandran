@@ -114,6 +114,7 @@ int run_filter_test(void)
   free_array(actual3);
 
   printf("  Filter tests completed...\n");
+  
   return failed_test;
 }
 
