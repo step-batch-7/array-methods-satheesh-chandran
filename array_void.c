@@ -20,13 +20,13 @@ void insert_number_to_void_array(ArrayVoid_ptr src, Object numbers, int length)
 
 ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid mapper)
 {
-  ArrayVoid_ptr mapped_array = create_ArrayVoid(src->length);
+  ArrayVoid_ptr map_result = create_ArrayVoid(src->length);
   for (int index = 0; index < src->length; index++)
   {
-    mapped_array->array[index] = mapper(src->array[index]);
-    mapped_array->length++;
+    map_result->array[index] = mapper(src->array[index]);
+    map_result->length++;
   }
-  return mapped_array;
+  return map_result;
 }
 
 ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
@@ -42,13 +42,13 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
       count++;
     }
   }
-  ArrayVoid_ptr filtered_array = create_ArrayVoid(count);
+  ArrayVoid_ptr filter_result = create_ArrayVoid(count);
   for (int index = 0; index < count; index++)
   {
-    filtered_array->array[index] = temp[index];
-    filtered_array->length++;
+    filter_result->array[index] = temp[index];
+    filter_result->length++;
   }
-  return filtered_array;
+  return filter_result;
 }
 
 Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer)
