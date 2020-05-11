@@ -1,21 +1,5 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include "array.h"
-
-int square(int number)
-{
-  return number * number;
-}
-
-int add(int num1, int num2)
-{
-  return num1 + num2;
-}
-
-Bool is_even(int number)
-{
-  return number % 2 == 0 ? True : False;
-}
 
 Array* copy_array(int numbers[], int length)
 {
@@ -62,15 +46,6 @@ int reduce(Array* src, int init, Reducer reducer)
     reduce_result = (*reducer)(reduce_result, src->array[index]);
   }
   return reduce_result;
-}
-
-void print_array(Array* src)
-{
-  for (int index = 0; index < src->length; index++)
-  {
-    printf("%d ", src->array[index]);
-  }
-  printf("\n");
 }
 
 void free_array(Array* src)

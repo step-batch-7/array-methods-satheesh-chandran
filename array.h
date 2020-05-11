@@ -33,6 +33,4 @@ void free_array(Array_ptr src);
 
 void run_test(void);
 
-void proxy_main(void);
-
 #endif
