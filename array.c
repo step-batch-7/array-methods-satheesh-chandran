@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #include "array.h"
 
-Array* copy_array(int numbers[], int length)
+Array_ptr copy_array(int numbers[], int length)
 {
-  Array* array_copy = malloc(sizeof(Array));
+  Array_ptr array_copy = malloc(sizeof(Array));
   array_copy->array = malloc(length * sizeof(int));
   for (int index = 0; index < length; index++)
   {
@@ -13,7 +13,7 @@ Array* copy_array(int numbers[], int length)
   return array_copy;
 }
 
-Array* map(Array* src, Mapper mapper)
+Array_ptr map(Array_ptr src, Mapper mapper)
 {
   int numbers[src->length], length = 0;
   for (int index = 0; index < src->length; index++)
@@ -24,7 +24,7 @@ Array* map(Array* src, Mapper mapper)
   return copy_array(numbers, length);
 }
 
-Array* filter(Array* src, Predicate predicate)
+Array_ptr filter(Array_ptr src, Predicate predicate)
 {
   int numbers[src->length], length = 0;
   for (int index = 0; index < src->length; index++)
@@ -38,7 +38,7 @@ Array* filter(Array* src, Predicate predicate)
   return copy_array(numbers, length);
 }
 
-int reduce(Array* src, int init, Reducer reducer)
+int reduce(Array_ptr src, int init, Reducer reducer)
 {
   int reduce_result = init;
   for (int index = 0; index < src->length; index++)
@@ -48,7 +48,7 @@ int reduce(Array* src, int init, Reducer reducer)
   return reduce_result;
 }
 
-void free_array(Array* src)
+void free_array(Array_ptr src)
 {
   free(src->array);
   free(src);

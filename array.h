@@ -25,11 +25,11 @@ Array_ptr filter(Array_ptr src, Predicate predicate);
 int reduce(Array_ptr src, int init, Reducer reducer);
 
 int square(int number);
-Bool is_even(int number);
 int add(int num1, int num2);
+Bool is_even(int number);
 void print_array(Array_ptr elements);
-Array_ptr copy_array(int numbers[], int length);
 void free_array(Array_ptr src);
+Array_ptr copy_array(int numbers[], int length);
 
 void run_test(void);
 

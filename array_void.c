@@ -4,64 +4,69 @@
 ArrayVoid_ptr create_array_void(int length)
 {
   ArrayVoid_ptr array_void = malloc(sizeof(ArrayVoid));
-  array_void->length = 0;
+
   array_void->array = malloc(sizeof(Object) * length);
+  array_void->length = length;
   return array_void;
 }
 
-void insert_number_to_void_array(ArrayVoid_ptr src, Object numbers, int length)
+void insert_number_to_array_void(ArrayVoid_ptr src, int_ptr numbers, int size)
 {
-  for (int index = 0; index < length; index++)
+  for (int index = 0; index < size; index++)
   {
-    src->array[index] = (Object)(*((long int *)numbers + index));
-    src->length++;
+    int_ptr ptr = malloc(sizeof(int));
+    *ptr = numbers[index];
+    src->array[index] = (Object)ptr;
   }
 }
 
 ArrayVoid_ptr map_void(ArrayVoid_ptr src, MapperVoid mapper)
 {
-  ArrayVoid_ptr map_result = create_array_void(src->length);
+  ArrayVoid_ptr map_array = create_array_void(src->length);
   for (int index = 0; index < src->length; index++)
   {
-    map_result->array[index] = mapper(src->array[index]);
-    map_result->length++;
+    map_array->array[index] = (*mapper)(src->array[index]);
   }
-  return map_result;
+  return map_array;
 }
 
 ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
 {
-  Object temp[src->length];
+  int temp[src->length];
   int count = 0;
   for (int index = 0; index < src->length; index++)
   {
-    Object current_element = src->array[index];
-    if (predicate(current_element))
+    if ((*predicate)(src->array[index]) == True)
     {
-      temp[count] = current_element;
+      int number = *(int_ptr)src->array[index];
+      temp[count] = number;
       count++;
     }
   }
-  ArrayVoid_ptr filter_result = create_array_void(count);
-  for (int index = 0; index < count; index++)
-  {
-    filter_result->array[index] = temp[index];
-    filter_result->length++;
-  }
-  return filter_result;
+  ArrayVoid_ptr filter_array = create_array_void(count);
+  insert_number_to_array_void(filter_array, temp, count);
+  return filter_array;
 }
 
 Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer)
 {
+  int_ptr final_reduce_result = malloc(sizeof(int));
+  *final_reduce_result = *(int_ptr)init;
   for (int index = 0; index < src->length; index++)
   {
-    init = reducer(init, src->array[index]);
+    Object reducer_result = (*reducer)(final_reduce_result, src->array[index]);
+    free(final_reduce_result);
+    final_reduce_result = reducer_result;
   }
-  return init;
+  return (Object)final_reduce_result;
 }
 
-void free_void_array(ArrayVoid_ptr src)
+void free_array_void(ArrayVoid_ptr src)
 {
+  for (int index = 0; index < src->length; index++)
+  {
+    free(src->array[index]);
+  }
   free(src->array);
   free(src);
 }

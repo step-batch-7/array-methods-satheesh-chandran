@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "array.h"
 #include "array_void.h"
 
@@ -28,34 +29,32 @@ void print_array(Array* src)
 
 /////////////////////////////////////////////////
 
-Object cube(Object data)
+Object square_void(Object data)
 {
-  long int number = (long int)data;
-  return (Object)(square(number) * number);
-}
-
-Object increment(Object data)
-{
-  long int number = (int)data;
-  return (Object)(number + 1);
-}
-
-Object addition(Object data1, Object data2)
-{
-  long int total = (long int)data1 + (long int)data2;
-  return (Object)total;
+  int number = *(int_ptr)data;
+  int_ptr square_of_number = malloc(sizeof(int));
+  *square_of_number = number * number;
+  return (Object)square_of_number;
 }
 
 Bool is_odd(Object data)
 {
-  return (int)data % 2;
+  int number = *(int_ptr)data;
+  return number % 2 == 1 ? True : False;
 }
 
-void display_number_array(ArrayVoid_ptr array)
+Object add_void(Object data1, Object data2)
 {
-  for (int index = 0; index < array->length; index++)
+  int *sum = malloc(sizeof(int));
+  *sum = *(int_ptr)data1 + *(int_ptr)data2;
+  return (Object)sum;
+}
+
+void print_array_void(ArrayVoid_ptr src)
+{
+  for (int index = 0; index < src->length;index++)
   {
-    printf("%d  ", (int)array->array[index]);
+    printf("%d ", *(int_ptr) src->array[index]);
   }
   printf("\n");
 }
@@ -64,37 +63,45 @@ void display_number_array(ArrayVoid_ptr array)
 
 int main(void)
 {
-  int numbers[] = { 2, 6, 3, 6, 1, 9, 4, 12, 11, 3 };
+  int numbers[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
   int size = sizeof(numbers) / sizeof(int);
   int initial = 0;
+
+  printf("______________________________________________________\n");
 
   Array elements = {numbers, size};
   Array *squares = map(&elements, &square);
   Array* even_numbers = filter(&elements, &is_even);
-  printf("\nSquares of numbers is...\n");
-  print_array(squares);
-  free_array(squares);
-  printf("\nEven numbers is...\n");
-  print_array(even_numbers);
-  printf("\nSum of numbers is %d\n", reduce(&elements, 0, &add));
-  free_array(even_numbers);
-  run_test();
 
-  long int nums[] = {2, 6, 3, 6, 1, 9, 4, 12, 11, 3};
-  size = sizeof(nums) / sizeof(long int);
-  ArrayVoid_ptr input_array_void = create_array_void(size);
-  insert_number_to_void_array(input_array_void, nums, size);
-  ArrayVoid_ptr cubes = map_void(input_array_void, &cube);
-  ArrayVoid_ptr odd_numbers = filter_void(input_array_void, &is_odd);
-  printf("\nInput array is...\n");
-  display_number_array(input_array_void);
-  printf("\nCube of numbers...\n");
-  display_number_array(cubes);
-  printf("\nOdd numbers is...\n");
-  display_number_array(odd_numbers);
-  printf("Sum of numbers is %d\n", (int)reduce_void(input_array_void, 0, &addition));
-  free_void_array(cubes);
-  free_void_array(odd_numbers);
-  free_void_array(input_array_void);
+  printf("\nSquares of numbers is -->  ");
+  print_array(squares);
+  printf("\nEven numbers is       -->  ");
+  print_array(even_numbers);
+  printf("\nSum of numbers is     -->  %d\n", reduce(&elements, 0, &add));
+
+  free_array(squares);
+  free_array(even_numbers);
+  // run_test();
+
+  printf("______________________________________________________\n");
+
+  ArrayVoid_ptr input_array = create_array_void(size);
+  insert_number_to_array_void(input_array, numbers, size);
+
+  ArrayVoid_ptr odd_voids = filter_void(input_array, &is_odd);
+  ArrayVoid_ptr squares_void = map_void(input_array, &square_void);
+  Object sum_of_numbers = reduce_void(input_array, &initial, &add_void);
+
+  printf("\nSquares of numbers is -->  ");
+  print_array_void(squares_void);
+  printf("\nOdd numbers is        -->  ");
+  print_array_void(odd_voids);
+  printf("\nSum of numbers is     -->  %d\n", *(int_ptr)sum_of_numbers);
+
+  free_array_void(squares_void);
+  free_array_void(odd_voids);
+  free(sum_of_numbers);
+
+  printf("______________________________________________________\n");
   return 0;
 }
