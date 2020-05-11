@@ -71,10 +71,12 @@ int main(void)
   Array elements = {numbers, size};
   Array *squares = map(&elements, &square);
   Array* even_numbers = filter(&elements, &is_even);
+  printf("\nSquares of numbers is...\n");
   print_array(squares);
   free_array(squares);
+  printf("\nEven numbers is...\n");
   print_array(even_numbers);
-  printf("%d\n", reduce(&elements, 0, &add));
+  printf("\nSum of numbers is %d\n", reduce(&elements, 0, &add));
   free_array(even_numbers);
   run_test();
 
@@ -84,10 +86,13 @@ int main(void)
   insert_number_to_void_array(input_array_void, nums, size);
   ArrayVoid_ptr cubes = map_void(input_array_void, &cube);
   ArrayVoid_ptr odd_numbers = filter_void(input_array_void, &is_odd);
+  printf("\nInput array is...\n");
   display_number_array(input_array_void);
+  printf("\nCube of numbers...\n");
   display_number_array(cubes);
+  printf("\nOdd numbers is...\n");
   display_number_array(odd_numbers);
-  printf("%d\n", (int)reduce_void(input_array_void, 0, &addition));
+  printf("Sum of numbers is %d\n", (int)reduce_void(input_array_void, 0, &addition));
   free_void_array(cubes);
   free_void_array(odd_numbers);
   free_void_array(input_array_void);
