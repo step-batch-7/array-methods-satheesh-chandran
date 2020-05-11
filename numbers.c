@@ -80,9 +80,9 @@ int main(void)
 
   long int nums[] = {2, 6, 3, 6, 1, 9, 4, 12, 11, 3};
   size = sizeof(nums) / sizeof(long int);
-  ArrayVoid_ptr array_void = create_ArrayVoid(10);
+  ArrayVoid_ptr array_void = create_ArrayVoid(size);
   insert_number_to_void_array(array_void, nums, size);
-
+  display_number_array(array_void);
   ArrayVoid_ptr cubes = map_void(array_void, &cube);
   display_number_array(cubes);
   free_void_array(cubes);
