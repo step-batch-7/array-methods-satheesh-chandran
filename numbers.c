@@ -30,19 +30,20 @@ void print_array(Array* src)
 
 Object cube(Object data)
 {
-  int number = (int)data;
+  long int number = (long int)data;
   return (Object)(square(number) * number);
 }
 
 Object increment(Object data)
 {
-  int number = (int)data;
+  long int number = (int)data;
   return (Object)(number + 1);
 }
 
 Object addition(Object data1, Object data2)
 {
-  return (Object)((int)data1 + (int)data2);
+  long int total = (long int)data1 + (long int)data2;
+  return (Object)total;
 }
 
 Bool is_odd(Object data)
@@ -77,8 +78,10 @@ int main(void)
   free_array(even_numbers);
   run_test();
 
+  long int nums[] = {2, 6, 3, 6, 1, 9, 4, 12, 11, 3};
+  size = sizeof(nums) / sizeof(long int);
   ArrayVoid_ptr array_void = create_ArrayVoid(10);
-  insert_number_to_void_array(array_void, numbers, size);
+  insert_number_to_void_array(array_void, nums, size);
 
   ArrayVoid_ptr cubes = map_void(array_void, &cube);
   display_number_array(cubes);

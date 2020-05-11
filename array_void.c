@@ -13,7 +13,7 @@ void insert_number_to_void_array(ArrayVoid_ptr src, Object numbers, int length)
 {
   for (int index = 0; index < length; index++)
   {
-    src->array[index] = (Object)(*((int *)numbers + index));
+    src->array[index] = (Object)(*((long int *)numbers + index));
     src->length++;
   }
 }

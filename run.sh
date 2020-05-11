@@ -5,6 +5,6 @@ clean()
 }
 
 clean;
-gcc -c -w *.c
+gcc -c *.c
 gcc -o output *.o && ./output
 clean;
