@@ -31,7 +31,7 @@ void print_array(Array* src)
 Object cube(Object data)
 {
   int number = (int)data;
-  return (Object)(number * number * number);
+  return (Object)(square(number) * number);
 }
 
 Object increment(Object data)
