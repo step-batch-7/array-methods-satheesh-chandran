@@ -100,6 +100,7 @@ int main(void)
 
   free_array_void(squares_void);
   free_array_void(odd_voids);
+  free_array_void(input_array);
   free(sum_of_numbers);
 
   printf("______________________________________________________\n");
