@@ -23,7 +23,7 @@ Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer);
 ArrayVoid_ptr create_array_void(int length);
 void insert_number_to_void_array(ArrayVoid_ptr src, Object numbers, int length);
 
-void insert_number_to_array_void(ArrayVoid_ptr input_array, int_ptr numbers, int size);
+void insert_number_to_array_void(ArrayVoid_ptr input_array, int *numbers, int size);
 void free_array_void(ArrayVoid_ptr src);
 
 #endif

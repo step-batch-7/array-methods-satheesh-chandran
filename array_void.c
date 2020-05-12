@@ -10,11 +10,11 @@ ArrayVoid_ptr create_array_void(int length)
   return array_void;
 }
 
-void insert_number_to_array_void(ArrayVoid_ptr src, int_ptr numbers, int size)
+void insert_number_to_array_void(ArrayVoid_ptr src, int * numbers, int size)
 {
   for (int index = 0; index < size; index++)
   {
-    int_ptr ptr = malloc(sizeof(int));
+    int * ptr = malloc(sizeof(int));
     *ptr = numbers[index];
     src->array[index] = (Object)ptr;
   }
@@ -38,7 +38,7 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
   {
     if ((*predicate)(src->array[index]) == True)
     {
-      int number = *(int_ptr)src->array[index];
+      int number = *(int *)src->array[index];
       temp[count] = number;
       count++;
     }
@@ -50,8 +50,8 @@ ArrayVoid_ptr filter_void(ArrayVoid_ptr src, PredicateVoid predicate)
 
 Object reduce_void(ArrayVoid_ptr src, Object init, ReducerVoid reducer)
 {
-  int_ptr final_reduce_result = malloc(sizeof(int));
-  *final_reduce_result = *(int_ptr)init;
+  int * final_reduce_result = malloc(sizeof(int));
+  *final_reduce_result = *(int *)init;
   for (int index = 0; index < src->length; index++)
   {
     Object reducer_result = (*reducer)(final_reduce_result, src->array[index]);
